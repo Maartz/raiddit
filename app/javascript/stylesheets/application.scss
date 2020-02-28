@@ -6,6 +6,12 @@
 //
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 @import "components/icons";
+@import "components/forms";
+@import "components/cards";
+@import "components/animations";
+@import "components/buttons";
+
+@tailwind utilities;
+
