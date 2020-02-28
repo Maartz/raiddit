@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2020_02_15_133838) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "submission_image"
-    t.string "submission_video"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
