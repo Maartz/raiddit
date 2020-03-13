@@ -71,8 +71,8 @@
                 <%= render_svg 'icons/create'%>
               <% end%>
             <% else %>
-              <%= link_to "Login", new_user_session_path, class: "btn btn-outline btn-small mr-2"%>
-              <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline btn-small mr-2"%>
+              <%= link_to "Log In", new_user_session_path, class: "btn btn-outline btn-small mr-2"%>
+              <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline btn-small mr-2 btn-purple text-white"%>
             <% end %>
           </div>
 
@@ -81,7 +81,7 @@
             <div class="dropdown rounded bg-white border border-gray-400 text-gray-600 ml-1 hover:bg-gray-200">
               <div class="dropdown-content pt-2 pb-2 pl-3 pr-1">
                 <%= link_to '#', class: "js-dropdown-user-target no-underline flex justify-between text-gray-700 uppercase text-xs tracking-wide items-center font-semibold" do %>
-                  <%# current_user.username if current_user.username %>
+                  <%= current_user.username if current_user.username %>
                   <%= render_svg 'icons/chevron-down'%>
                 <% end %>
 
@@ -116,8 +116,8 @@
       </div>
     </nav>
 
-    <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
     <%= yield %>
+    <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
 
   </body>
 </html>
