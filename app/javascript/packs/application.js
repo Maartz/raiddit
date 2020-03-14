@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 import "components/tab.js";
+import "components/dropdown.js";
 import "stylesheets/application";
 
 
