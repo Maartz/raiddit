@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_201006) do
+ActiveRecord::Schema.define(version: 2020_03_14_213528) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "communities", force: :cascade do |t|
+    t.string "name"
+    t.string "title"
+    t.text "description"
+    t.text "sidebar"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["name"], name: "index_communities_on_name", unique: true
+    t.index ["user_id"], name: "index_communities_on_user_id"
+  end
 
   create_table "submissions", force: :cascade do |t|
     t.string "title"
@@ -24,6 +37,8 @@ ActiveRecord::Schema.define(version: 2020_03_13_201006) do
     t.string "submission_image"
     t.bigint "user_id"
     t.string "submission_video"
+    t.bigint "community_id"
+    t.index ["community_id"], name: "index_submissions_on_community_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
@@ -41,5 +56,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_201006) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "communities", "users"
+  add_foreign_key "submissions", "communities"
   add_foreign_key "submissions", "users"
 end
