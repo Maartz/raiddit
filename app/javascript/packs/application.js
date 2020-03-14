@@ -8,7 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-import "./tab.js";
+import "components/tab.js";
 import "stylesheets/application";
 
 
