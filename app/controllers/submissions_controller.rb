@@ -62,13 +62,15 @@ class SubmissionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_submission
-      @submission = Submission.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def submission_params
-      params.require(:submission).permit(:title, :body, :url, :submission_image, :submission_video)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def submission_params
+    params.require(:submission).permit(:title, :body, :url, :submission_image,
+                                       :submission_video, :community_id)
+  end
 end

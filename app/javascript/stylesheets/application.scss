@@ -17,3 +17,6 @@
 
 @tailwind utilities;
 
+.btn, .tab {
+  transition: all 0.2s ease;
+}
