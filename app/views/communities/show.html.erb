@@ -1,24 +1,21 @@
-<p id="notice"><%= notice %></p>
+<% content_for :community_label, "rd/#{@community.name}" %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @community.name %>
-</p>
+<div class="bg-purple-600 text-white">
+  <div class="container lg:p-10 p-4">
+    <h1 class="lg:text-3xl text-lg font-bold">
+      rd/<%= @community.name %>
+    </h1>
+  </div>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @community.title %>
-</p>
+<% content_for :primary_content do %>
+  <% @community.submissions.each do |submission|%>
+    <%= render "submissions/submission", submission: submission %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @community.description %>
-</p>
+<% content_for :secondary_content do %>
+  <%= render "sidebar", community: @community %>
+<% end %>
 
-<p>
-  <strong>Sidebar:</strong>
-  <%= @community.sidebar %>
-</p>
-
-<%= link_to 'Edit', edit_community_path(@community) %> |
-<%= link_to 'Back', communities_path %>
+<%= render "basic_layout" %>

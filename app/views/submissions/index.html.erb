@@ -5,8 +5,8 @@
       <%= render @submissions %>
     <% else %>
       <div class="p-10 text-center">
-        <%= render_svg "icons/empty" %>
-        <p class="mb-4">Wow such empty...</p>
+        <%= image_tag "wow.png", class: "h-48 mx-auto mb-6" %>
+        <p class="mb-4 font-black">Wow such empty...</p>
         <% link_to "Create a new submission", new_submission_path, class: "btn btn-purple btn-small" %>
       </div>
     <% end %>
