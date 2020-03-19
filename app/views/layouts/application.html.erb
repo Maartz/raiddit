@@ -32,7 +32,7 @@
 
 <% end %>
 
-<nav class="bg-white py-2 border-b border-gray-400" role="navigation" aria-label="main navigation">
+<nav class="bg-white py-2 border-b border-gray-400 js-nav" role="navigation" aria-label="main navigation">
   <div
     class="flex flex-wrap items-center justify-center lg:justify-start lg:content-center  px-4 lg:px-6 "
   >
@@ -44,15 +44,17 @@
       <div class="w-full lg:w-1/4 px-0 md:px-2 mb-2 lg:mb-0">
         <div class="dropdown rounded bg-white text-gray-700 ml-1 hover:bg-gray-200 z-50 relative">
           <%= link_to "#", class: "dropdown-target border no-underline flex justify-between text-gray-700 items-center py-2 pl-3 pr-1 text-sm rounded", role: "button" do %>
+            <!-- Dynamic content for dropdown -->
             <%= content_for?(:community_label) ? yield(:community_label) : "Select a community" %>
             <%= render_svg "icons/chevron-down", styles: "icon-md h-8 fill-current text-gray-600 mr-3"%>
           <% end %>
-          <ul class="dropdown-menu shadow-lg hidden leading-normal list-none p-0 rounded-b border-t text-sm z-50">
-            <%= @communities.each do |community| %>
+          <ul class="dropdown-menu hidden shadow-lg leading-normal list-none p-0 rounded-b border-t text-sm z-50">
+
+            <% @communities.each do |community| %>
               <li>
-                <%= link_to community, class:"bg-white px-4 py-2 hover:bg-purple-500 hover:text-white no-underline flex items-center" do %>
-                  <%= render_svg "icons/conversation", styles: "icon-sm fill-current text-gray-500 mr-2"%>
-                  <span>rd/</span><%= community.name %>
+                <%= link_to community, class: "bg-white px-4 py-2 hover:bg-purple-500 hover:text-white no-underline flex items-center" do %>
+                  <%= render_svg "icons/conversation", styles: "icon-sm mr-2 fill-current text-gray-500" %>
+                  <span>rd/</span> <%= community.name %>
                 <% end %>
               </li>
             <% end %>
@@ -94,7 +96,7 @@
               <%= render_svg 'icons/chevron-down' %>
             <% end %>
 
-            <ul class="list-none hidden dropdown-list absolute left-o rounded-b border border-gray-500 shadow">
+            <ul class="dropdown-menu dropdown-menu-right dropdown-user-account list-none hidden absolute left-o rounded-b border border-gray-500 shadow">
               <h5 class="mt-2 uppercase text-xs text-gray-500 font-normal py-2 pl-3 tracking-wide">
                 My stuff
               </h5>
@@ -123,8 +125,7 @@
     </div>
   </div>
 </nav>
-
-<%= yield %>
+<%= content_for?(:content) ? yield(:content) : yield %>
 
 </body>
 </html>
