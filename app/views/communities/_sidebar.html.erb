@@ -5,9 +5,12 @@
         <%= render_svg "icons/conversation", styles: "w-3 fill-current text-gray-500" %>
       </span>
 
-      <%= link_to edit_community_path(community), class: "no-underline mr-2" do %>
-        <%= render_svg "icons/edit", styles: "w-4 fill-current text-gray-500", title: "Edit" %>
+      <% if author_of?(community) %>
+        <%= link_to edit_community_path(community), class: "no-underline mr-2" do %>
+          <%= render_svg "icons/edit", styles: "w-4 fill-current text-gray-500", title: "Edit" %>
+        <% end %>
       <% end %>
+
     </div>
 
     <h3 class="m-0 leading-tight text-lg">
@@ -15,7 +18,7 @@
     </h3>
 
     <div class="flex flex-wrap justify-start items-center pt-2">
-      <div class="w-1/2 border-rigth border-gray-400">
+      <div class="w-1/2 border-r border-gray-400">
         <p class="m-0">
           <%= community.submissions.count %>
         </p>
