@@ -91,7 +91,7 @@
       <% if user_signed_in? %>
         <div class="dropdown dropdown-user-account rounded bg-white border border-gray-400 text-gray-600 ml-1 hover:bg-gray-200 z-50 relative">
           <div class="dropdown-content pt-2 pb-2 pl-3 pr-1">
-            <%= link_to '#', class: "js-dropdown-user-target no-underline flex justify-between text-gray-700 uppercase text-xs tracking-wide items-center font-semibold" do %>
+            <%= link_to "#", class: "js-dropdown-user-target no-underline flex justify-between text-gray-700 uppercase text-xs tracking-wide items-center font-semibold" do %>
               <%= current_user.username if current_user.username %>
               <%= render_svg 'icons/chevron-down' %>
             <% end %>
@@ -101,7 +101,7 @@
                 My stuff
               </h5>
               <li>
-                <%= link_to '#', class: "hover:bg-purple-500 hover:text-white text-gray-700 no-underline block py-2 px-4 flex items-center text-sm" do %>
+                <%= link_to profile_path(current_user), class: "hover:bg-purple-500 hover:text-white text-gray-700 no-underline block py-2 px-4 flex items-center text-sm" do %>
                   <%= render_svg "icons/user", styles: "icon-md h-8 fill-current text-gray-600 mr-3" %> My Profile
                 <% end %>
               </li>
