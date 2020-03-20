@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :set_submission, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[show index]
   # GET /submissions
   # GET /submissions.json
   def index
@@ -10,6 +11,7 @@ class SubmissionsController < ApplicationController
   # GET /submissions/1
   # GET /submissions/1.json
   def show
+    @comment = Comment.new
   end
 
   # GET /submissions/new
@@ -18,8 +20,7 @@ class SubmissionsController < ApplicationController
   end
 
   # GET /submissions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /submissions
   # POST /submissions.json
