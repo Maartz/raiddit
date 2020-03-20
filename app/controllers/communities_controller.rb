@@ -25,7 +25,7 @@ class CommunitiesController < ApplicationController
   # POST /communities
   # POST /communities.json
   def create
-    @community = current_user.communities.build
+    @community = current_user.communities.build(community_params)
     @community.user_id = current_user.id
 
     respond_to do |format|

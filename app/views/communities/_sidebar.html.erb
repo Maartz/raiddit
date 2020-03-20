@@ -3,6 +3,10 @@
     <div class="m-0 leading-tight flex items-center justify-between">
       <span class="text-xs no-underline inline-flex items-center text-gray-600">
         <%= render_svg "icons/conversation", styles: "w-3 fill-current text-gray-500" %>
+
+        <span class="ml-1">
+          rd/<%= community.name %>
+        </span>
       </span>
 
       <% if author_of?(community) %>
