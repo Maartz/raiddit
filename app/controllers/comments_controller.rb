@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy show]
   before_action :authenticate_user!
+  before_action :set_submission
 
   def new;
   end
@@ -33,11 +34,9 @@ class CommentsController < ApplicationController
 end
 
 def edit;
-  @comment = set_comment_from_submission
 end
 
 def update;
-  @comment = set_comment_from_submission
   respond_to do |format|
     if @comment.update(comment_params)
       format.html do
@@ -52,7 +51,6 @@ def update;
 end
 
 def destroy;
-  @comment = @submission.comments.find(params[:id])
   @comment.destroy
   redirect_to submission_path(@submission)
 end
@@ -64,13 +62,9 @@ def set_submission
   @submission = Submission.find(params[:submission_id])
 end
 
-def set_comment_from_submission
-  @submission.comments.find(params[:id])
-end
-
 def set_comment
   # Retrieve the comment
-  @comment = Comment.find(params[:id])
+  @comment = @submission.comments.find(params[:id])
 end
 
 # Require a comment and only permit reply
