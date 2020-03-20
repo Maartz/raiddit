@@ -10,13 +10,13 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Submission.comments.create(params[:comment].permit(:reply, :submission_id))
+    @comment = @submission.comments.create(params[:comment].permit(:reply, :submission_id))
     @comment.user_id = current_user.id
 
     respond_to do |format|
       if @comment.save
         format.html { redirect_to submission_path(@submission), notice: 'Comment was successfully created.' }
-        format.js # renders create.js.erb in app/views/comments
+        format.js # renders create.js.erb in app/views/comments/
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html do
@@ -27,49 +27,49 @@ class CommentsController < ApplicationController
       format.js
       format.json do
         render json: @comment.errors,
-                status: :unprocessable_entity
+               status: :unprocessable_entity
       end
     end
   end
-end
 
-def edit;
-end
-
-def update;
-  respond_to do |format|
-    if @comment.update(comment_params)
-      format.html do
-        redirect_to submission_path(@submission),
-                    notice: 'Your comment was successfully updated.'
-      end
-    else
-      format.html { render :edit }
-      format.json { render json: @comment.errors, status: :unprocessable_entity}
+  def edit
+    respond_to do |format|
+      format.js # render edit.js.erb
     end
   end
-end
 
-def destroy;
-  @comment.destroy
-  redirect_to submission_path(@submission)
-end
+  def update
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to submission_path(@submission) }
+      else
+        format.html { render :edit }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-private
+  def destroy
+    @comment.destroy
+    redirect_to submission_path(@submission)
+  end
 
-def set_submission
-  # Retrieve the submission
-  @submission = Submission.find(params[:submission_id])
-end
+  private
 
-def set_comment
-  # Retrieve the comment
-  @comment = @submission.comments.find(params[:id])
-end
+  def set_submission
+    # Retrieve the submission
+    @submission = Submission.find(params[:submission_id])
+  end
 
-# Require a comment and only permit reply
-def comment_params
-  params.require(:comment).permit(:reply)
-end
+  def set_comment
+    # Retrieve the comment
+    @comment = Comment.find(params[:id])
+    # @comment = @submission.comments.find(params[:id])
+  end
+
+  # Require a comment and only permit reply
+  def comment_params
+    params.require(:comment).permit(:reply)
+  end
 
 end

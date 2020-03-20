@@ -10,7 +10,9 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions/1
   # GET /submissions/1.json
-  def show; end
+  def show
+    @comment = Comment.new
+  end
 
   # GET /submissions/new
   def new
