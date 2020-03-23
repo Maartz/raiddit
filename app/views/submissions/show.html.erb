@@ -3,11 +3,11 @@
 <%= render "communities/community_header", community: @submission.community %>
 
 <% content_for :primary_content do %>
-  <div class="p-4 pb-6 pr-6">
+  <div id="submission-<% @submission.id %>" class="p-4 pb-6 pr-6">
     <div class="flex flex-row flex-wrap items-start justify-between">
 
       <div class="submission-voting text-xs pr-2">
-        <%= render "voting" %>
+        <%= render "voting", submission: @submission %>
       </div>
 
       <div class="submissions-content">
