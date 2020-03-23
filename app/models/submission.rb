@@ -11,4 +11,12 @@ class Submission < ApplicationRecord
   validates :title, presence: true
   validates :body, length: { maximum: 8000 }
   validates :url, url: { allow_blank: true }
+
+  acts_as_votable
+
+  def total_vote_count
+    puts self.get_upvotes.size
+    puts self.get_downvotes.size
+    (self.get_upvotes.size - self.get_downvotes.size).to_s
+  end
 end

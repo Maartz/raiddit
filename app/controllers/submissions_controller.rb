@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: %i[show edit update destroy]
+  before_action :set_submission, only: %i[show edit update destroy downvote upvote]
   before_action :authenticate_user!, except: %i[show index]
   # GET /submissions
   # GET /submissions.json
@@ -20,7 +20,8 @@ class SubmissionsController < ApplicationController
   end
 
   # GET /submissions/1/edit
-  def edit; end
+  def edit;
+  end
 
   # POST /submissions
   # POST /submissions.json
@@ -61,6 +62,37 @@ class SubmissionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def upvote
+    respond_to do |format|
+      unless current_user.voted_for? @submission
+        format.html { redirect_back(fallback_location: root_path) }
+        format.json { head :no_content }
+        format.js { flash.now[:notice] = "Successfully upvoted submission" }
+        @submission.upvote_by current_user
+      else
+        format.html { redirect_back(fallback_location: root_path) }
+        format.json { head :no_content }
+        format.js { flash.now[:notice] = "You already vote this submission" }
+      end
+    end
+  end
+
+  def downvote
+    respond_to do |format|
+      unless current_user.voted_for? @submission
+        format.html { redirect_back(fallback_location: root_path) }
+        format.json { head :no_content }
+        format.js { flash.now[:notice] = "Successfully downvoted submission" }
+        @submission.downvote_by current_user
+      else
+        format.html { redirect_back(fallback_location: root_path) }
+        format.json { head :no_content }
+        format.js { flash.now[:notice] = "You already vote this submission" }
+      end
+    end
+  end
+
 
   private
 
