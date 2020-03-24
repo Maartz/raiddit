@@ -7,10 +7,11 @@ Rails.application.routes.draw do
       put 'upvote', to: 'submissions#upvote'
       put 'downvote', to: 'submissions#downvote'
     end
-    resources :comments
-    member do
-      put 'upvote', to: 'comments#upvote'
-      put 'downvote', to: 'comments#downvote'
+    resources :comments do
+      member do
+        put 'upvote', to: 'comments#upvote'
+        put 'downvote', to: 'comments#downvote'
+      end
     end
   end
 
