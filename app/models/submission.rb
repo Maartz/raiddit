@@ -1,4 +1,6 @@
 class Submission < ApplicationRecord
+  include VotesCountable
+
   mount_uploader :submission_image, SubmissionImageUploader
   mount_uploader :submission_video, SubmissionVideoUploader
   belongs_to :user
@@ -14,9 +16,4 @@ class Submission < ApplicationRecord
 
   acts_as_votable
 
-  def total_vote_count
-    puts self.get_upvotes.size
-    puts self.get_downvotes.size
-    (self.get_upvotes.size - self.get_downvotes.size).to_s
-  end
 end

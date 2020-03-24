@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy show]
   before_action :authenticate_user!
   before_action :set_submission
+  before_action :find_comment, only: %i[upvote downvote]
 
   def new;
   end
@@ -54,6 +55,36 @@ class CommentsController < ApplicationController
     redirect_to submission_path(@submission)
   end
 
+  def upvote
+    respond_to do |format|
+      unless current_user.voted_for? @comment
+        format.html { redirect_back(fallback_location: root_path) }
+        format.json { head :no_content }
+        format.js { flash.now[:notice] = "Successfully upvoted comment" }
+        @comment.upvote_by current_user
+      else
+        format.html { redirect_back(fallback_location: root_path) }
+        format.json { head :no_content }
+        format.js { flash.now[:notice] = "You already vote this comment" }
+      end
+    end
+  end
+
+  def downvote
+    respond_to do |format|
+      unless current_user.voted_for? @comment
+        format.html { redirect_back(fallback_location: root_path) }
+        format.json { head :no_content }
+        format.js { flash.now[:notice] = "Successfully downvoted comment" }
+        @comment.downvote_by current_user
+      else
+        format.html { redirect_back(fallback_location: root_path) }
+        format.json { head :no_content }
+        format.js { flash.now[:notice] = "You already vote this comment" }
+      end
+    end
+  end
+
   private
 
   def set_submission
@@ -64,7 +95,10 @@ class CommentsController < ApplicationController
   def set_comment
     # Retrieve the comment
     @comment = Comment.find(params[:id])
-    # @comment = @submission.comments.find(params[:id])
+  end
+
+  def find_comment
+    @comment = @submission.comments.find(params[:id])
   end
 
   # Require a comment and only permit reply
