@@ -1,12 +1,6 @@
 <div id="comment-<%= comment.id %>" class="flex items-start py-1 mt-2">
   <div class="flex flex-col items-center">
-    <%= link_to "#" do %>
-      <%= render_svg "icons/up-vote", title: "upvote", styles: "fill-current text-gray-600 hover:text-purple-500" %>
-    <% end %>
-
-    <%= link_to "#" do %>
-      <%= render_svg "icons/down-vote", title: "downvote", styles: "fill-current text-gray-600 hover:text-purple-500" %>
-    <% end %>
+    <%= render "comments/comment_voting", comment: comment %>
   </div>
 
   <div class="flex-1 pl-4">
