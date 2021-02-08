@@ -30,7 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Custom gems
 gem 'acts_as_votable', '~> 0.12.1'
-gem 'carrierwave', '~> 2.0', '>= 2.0.2'
+gem 'carrierwave', '~> 2.1'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'mini_magick', '~> 4.10', '>= 4.10.1'
 gem 'validate_url', '~> 1.0', '>= 1.0.8'
